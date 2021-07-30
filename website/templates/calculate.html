@@ -1,0 +1,75 @@
+{% extends 'base.html' %} {% block title %}Обчислити{% endblock %} {% block
+content %}
+<div class="card" style="width: 18rem">
+  <img src="../../photos/Румб.jpg" class="card-img-top" alt="Румб" />
+  <div class="card-body">
+    <h5 class="card-title">Допустима Нев'язка Нівелювання 4 Класу</h5>
+    <p class="card-text">Порахувати Допустиму Нев'язку Нівелювання 4 Класу</p>
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-toggle="modal"
+      data-target="#exampleModalCenter"
+    >
+      Обчислити
+    </button>
+    <div
+      class="modal fade"
+      id="exampleModalCenter"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">
+              Обчислити Нев'язку
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form name="search" method="get" autocomplete="off">
+              <div class="form-group">
+                <label for="formGroupExampleInput">Довжина Ходу В Км</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="formGroupExampleInput"
+                  placeholder="180 00 00"
+                />
+              </div>
+            </form>
+            <div class="answer_div"></div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+              onclick="delAnswerP();"
+            >
+              Закрити
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="addAnswerP();"
+            >
+              Порахувати
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

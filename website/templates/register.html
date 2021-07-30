@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block title %}Реєстрація{% endblock %} {% block
+content %}
+<form method="POST">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Електронна пошта</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      placeholder="Yaroslav.Kovaliv.HD.2020@lpnu.ua"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Пароль</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password1"
+      name="password1"
+      placeholder="Придумайте пароль"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label"
+      >Пароль (Підтверження)</label
+    >
+    <input
+      type="password"
+      class="form-control"
+      id="password2"
+      name="password2"
+      placeholder="Введіть пароль ще раз"
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Зареєструватись</button>
+</form>
+{% endblock %}
