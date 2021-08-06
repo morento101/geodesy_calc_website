@@ -19,7 +19,7 @@ def login():
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
-                flash("Неправильний парооль", category="erro")
+                flash("Неправильний пароль", category="error")
         else:
             flash("Такий користувач не існує", category="error")
 
