@@ -1,5 +1,3 @@
-from flask import flash
-
 def coma_replace(string):
     if type(string) == float:
         string = str(string)
@@ -31,4 +29,15 @@ def y_value_for_zones(zone, distance, direction):
             else:
                 y_value = (zone * 1_000_000) + 500_000 + distance
                 res = f"\nЗначення Ординати = {zone} * {1_000_000} + 500 000 + {distance} = {y_value}"
+    return res
+
+
+def accuracy_of_scale(scale):
+    if type(scale) != int:
+        raise TypeError('Масштаб повинен бути цілим додатнім числом')
+    elif scale <= 0:
+        raise ValueError('Масштаб не може бути меньшим за нуль або дорівнювати йому')
+    else:
+        accuracy = scale / 10000
+        res = f'Точність масштабу = {scale} / 10000 = {accuracy}'
     return res

@@ -1,19 +1,39 @@
-{% extends 'base.html' %} {% block title %}Обчислити{% endblock %} {%
-block content %}
-<div class="card" style="width: 18rem">
-  <img
-    src="{{ url_for('static', filename='zones.png') }}"
-    class="card-img-top"
-    alt="Зони"
-  />
-  <div class="card-body">
-    <h5 class="card-title">Значення Ординати Точĸи</h5>
-    <p class="card-text">Знаючи Номер Зони/Коллони, Відстань Та Напрямок</p>
-    <button type="button" class="btn btn-primary">
-      <a href="/calc_zone" style="text-decoration: none; color: aliceblue" ;
-        >Обчислити</a
-      >
-    </button>
+{% extends 'base.html' %} {% block title %}Обчислити{% endblock %} {% block
+content %}
+<!-- ZONE -->
+<div class="flex-div">
+  <div class="card" style="width: 18rem">
+    <img
+      src="{{ url_for('static', filename='zones.png') }}"
+      class="card-img-top"
+      alt="Зони"
+    />
+    <div class="card-body">
+      <h5 class="card-title">Значення Ординати Точĸи</h5>
+      <p class="card-text">Знаючи Номер Зони/Коллони, Відстань Та Напрямок</p>
+      <button type="button" class="btn btn-primary">
+        <a href="/calc_zone" style="text-decoration: none; color: aliceblue" ;
+          >Обчислити</a
+        >
+      </button>
+    </div>
+  </div>
+
+  <div class="card" style="width: 18rem">
+    <img
+      src="{{ url_for('static', filename='accurancy.gif') }}"
+      class="card-img-top"
+      alt="Точність"
+    />
+    <div class="card-body">
+      <h5 class="card-title" id="specific-title">Точність Маштабу Карти</h5>
+      <p class="card-text">Знаючи Маштаб Карти</p>
+      <button id="specific-button" type="button" class="btn btn-primary">
+        <a href="/calc_map_accuracy" style="text-decoration: none; color: aliceblue" ;
+          >Обчислити</a
+        >
+      </button>
+    </div>
   </div>
 </div>
 {% endblock %}

@@ -1,5 +1,5 @@
 import unittest
-from functions_for_calc import y_value_for_zones
+from functions_for_calc import y_value_for_zones, accuracy_of_scale
 
 
 class TestYValueForZones(unittest.TestCase):
@@ -22,6 +22,30 @@ class TestYValueForZones(unittest.TestCase):
         self.assertRaises(TypeError, y_value_for_zones, True, "333_333", None)
         self.assertRaises(TypeError, y_value_for_zones, ["4", ], ("333_333",), 'захід')
         self.assertRaises(TypeError, y_value_for_zones, ["4", ], 5j+2, 'захід')
+
+
+class TestMapAccurancy(unittest.TestCase):
+    def test_accurancy(self):
+        self.assertEqual(accuracy_of_scale(10_000), 1)
+        self.assertEqual(accuracy_of_scale(1_000), 0.1)
+        self.assertEqual(accuracy_of_scale(50_000), 5)
+        self.assertEqual(accuracy_of_scale(5_000), 0.5)
+        self.assertEqual(accuracy_of_scale(2_000), 0.2)
+        self.assertEqual(accuracy_of_scale(25_000), 2.5)
+        self.assertEqual(accuracy_of_scale(500), 0.05)
+        self.assertEqual(accuracy_of_scale(2_000), 0.2)
+
+    def test_values(self):
+        self.assertRaises(ValueError, accuracy_of_scale, 0)
+        self.assertRaises(ValueError, accuracy_of_scale, -10000)
+
+    def test_type(self):
+        self.assertRaises(TypeError, accuracy_of_scale, [10_000])
+        self.assertRaises(TypeError, accuracy_of_scale, (10_000,))
+        self.assertRaises(TypeError, accuracy_of_scale, '10_000')
+        self.assertRaises(TypeError, accuracy_of_scale, True)
+        self.assertRaises(TypeError, accuracy_of_scale, None)
+        self.assertRaises(TypeError, accuracy_of_scale, 5j+2)
 
 
 if __name__ == "__main__":

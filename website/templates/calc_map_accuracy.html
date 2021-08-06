@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block title %}Авторизація{% endblock %} {% block
+content %}
+<form
+  name="scaleForm"
+  action="{{ url_for('views.calc_map_accuracy') }}"
+  method="post"
+  autocomplete="off"
+>
+  <label for="basic-url">Масштаб</label>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">1 :</span>
+    </div>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="500"
+      id="scale"
+      name="scale"
+    />
+  </div>
+  <div
+    class="p-3 mb-2 bg-success text-white rounded"
+    style="white-space: pre-line"
+  >Відповідь: {{ res }}</div>
+  <hr />
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">
+    <a href="/" style="text-decoration: none; color: aliceblue">Назад</a>
+  </button>
+  <button type="submit" class="btn btn-primary">Порахувати</button>
+</form>
+{% endblock %}
