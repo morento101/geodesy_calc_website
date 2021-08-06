@@ -1,3 +1,4 @@
+from functools import reduce
 from flask import Blueprint, render_template, request
 from flask.helpers import flash
 from flask_login import login_required, current_user
@@ -9,6 +10,7 @@ views = Blueprint('views', __name__)
 @login_required
 def home():
     return render_template("calculate.html", user=current_user)
+
 
 @views.route("/calc_zone", methods=["GET", "POST"])
 @login_required
@@ -54,6 +56,7 @@ def calc_map_accuracy():
     if request.method == "POST":
         scale = request.form.get('scale')
         if scale:
+            res = ''
             try:
                 scale = int(scale)
             except Exception as e:
@@ -63,6 +66,8 @@ def calc_map_accuracy():
                     res = f.accuracy_of_scale(scale)
                 except Exception as e:
                     flash(f"{e}", category="error")
+            finally:
+                return render_template('calc_map_accuracy.html', user=current_user, res=res)
         else:
             flash('Введіть масштаб', category="error")
     return render_template('calc_map_accuracy.html', user=current_user)

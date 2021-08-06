@@ -39,5 +39,5 @@ def accuracy_of_scale(scale):
         raise ValueError('Масштаб не може бути меньшим за нуль або дорівнювати йому')
     else:
         accuracy = scale / 10000
-        res = f'Точність масштабу = {scale} / 10000 = {accuracy}'
+        res = f'\nТочність масштабу = {scale} / 10000 = {accuracy} м'
     return res
