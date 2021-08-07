@@ -1,3 +1,8 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
 .flex-div {
     display: flex; 
     gap: 7px;
@@ -19,6 +24,7 @@ h3 {
 
 .card > img {
     height: 250px;
+    width: 270px;
 }
 
 .card {
@@ -27,10 +33,11 @@ h3 {
 
 footer {
     position: fixed;
-    bottom: 0px;
     width: 100%;
     height: 60px;
     background-color: #f5f5f5;
+    margin-top: 10px;
+    bottom: 0px;
 }
 
 footer > div > span {
@@ -38,6 +45,18 @@ footer > div > span {
     margin-top: 15px;
 }
 
-.container {
-    margin-bottom: 75px;
+.positioned {
+    margin-bottom: 70px;
+}
+
+.navbar {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    top: 0px
+}
+
+h3 {
+    margin-top: 90px;
+    margin-bottom: 25px;
 }
