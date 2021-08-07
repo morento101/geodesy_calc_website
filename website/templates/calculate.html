@@ -3,7 +3,7 @@ content %}
 <h3 align="center">Обчислити</h3>
 <!-- ZONE -->
 <div class="flex-div">
-  <div class="card" style="width: 18rem">
+  <div class="card">
     <img
       src="{{ url_for('static', filename='zones.png') }}"
       class="card-img-top"
@@ -20,17 +20,51 @@ content %}
     </div>
   </div>
   <!-- ACCURACY -->
-  <div class="card" style="width: 18rem">
+  <div class="card">
     <img
       src="{{ url_for('static', filename='accuracy.gif') }}"
       class="card-img-top"
       alt="Точність"
     />
     <div class="card-body">
-      <h5 class="card-title" id="specific-title">Точність Маcштабу Карти</h5>
-      <p class="card-text">Маючи При Цьому Маштаб Карти</p>
+      <h5 class="card-title">Точність Маcштабу Карти</h5>
+      <p class="card-text">Маючи При Цьому Масштаб Карти</p>
       <button id="specific-button" type="button" class="btn btn-primary">
         <a href="/calc_map_accuracy" style="text-decoration: none; color: aliceblue" ;
+          >Обчислити</a
+        >
+      </button>
+    </div>
+  </div> 
+  <!-- SEGMENTATION -->
+  <div class="card">
+    <img
+      src="{{ url_for('static', filename='segmentation.svg') }}"
+      class="card-img-top"
+      alt="Сегментація"
+    />
+    <div class="card-body">
+      <h5 class="card-title">Масштаб Карти</h5>
+      <p class="card-text">Маючи Її Номенклатуру</p>
+      <button type="button" class="btn btn-primary">
+        <a href="/segmentation" style="text-decoration: none; color: aliceblue" ;
+          >Обчислити</a
+        >
+      </button>
+    </div>
+  </div> 
+  <!-- DIVIDING -->
+  <div class="card">
+    <img
+      src="{{ url_for('static', filename='dividing.jpg') }}"
+      class="card-img-top"
+      alt="Номенклатура"
+    />
+    <div class="card-body">
+      <h5 class="card-title">Ділення трапецій</h5>
+      <p class="card-text">На Скільки Частин Потрібно Розділити Одну Трапецію, Щоб Отримати Іншу</p>
+      <button type="button" class="btn btn-primary">
+        <a href="/dividing" style="text-decoration: none; color: aliceblue" ;
           >Обчислити</a
         >
       </button>

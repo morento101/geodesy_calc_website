@@ -71,3 +71,16 @@ def calc_map_accuracy():
         else:
             flash('Введіть масштаб', category="error")
     return render_template('calc_map_accuracy.html', user=current_user)
+
+
+@views.route('/segmentation', methods=["GET", "POST"])
+@login_required
+def segmentation():
+    return render_template('segmentation.html', user=current_user)
+
+
+@views.route('/dividing', methods=["GET", "POST"])
+@login_required
+def dividing():
+    return render_template('dividing.html', user=current_user)
+
