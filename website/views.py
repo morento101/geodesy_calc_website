@@ -73,14 +73,14 @@ def calc_map_accuracy():
     return render_template('calc_map_accuracy.html', user=current_user)
 
 
-@views.route('/segmentation', methods=["GET", "POST"])
+@views.route('/calc_segmentation', methods=["GET", "POST"])
 @login_required
-def segmentation():
-    return render_template('segmentation.html', user=current_user)
+def calc_segmentation():
+    return render_template('calc_segmentation.html', user=current_user)
 
 
-@views.route('/dividing', methods=["GET", "POST"])
+@views.route('/calc_dividing', methods=["GET", "POST"])
 @login_required
-def dividing():
-    return render_template('dividing.html', user=current_user)
+def calc_dividing():
+    return render_template('calc_dividing.html', user=current_user)
 
