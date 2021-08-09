@@ -1,5 +1,5 @@
 import unittest
-from functions_for_calc import y_value_for_zones, accuracy_of_scale
+from functions_for_calc import y_value_for_zones, accuracy_of_scale, get_scale_from_segment
 
 
 class TestYValueForZones(unittest.TestCase):
@@ -46,6 +46,42 @@ class TestMapAccurancy(unittest.TestCase):
         self.assertRaises(TypeError, accuracy_of_scale, True)
         self.assertRaises(TypeError, accuracy_of_scale, None)
         self.assertRaises(TypeError, accuracy_of_scale, 5j+2)
+
+    
+class TestGetScaleFromSegment(unittest.TestCase):
+    def test_get_scale_from_segment(self):
+        self.assertEqual(get_scale_from_segment('L–35–35–А–а'), '1:25 000')
+        self.assertEqual(get_scale_from_segment('ІХ–М–35'), '1:300 000')
+        self.assertEqual(get_scale_from_segment('С–3–9'), '1:100 000')
+        self.assertEqual(get_scale_from_segment('М–35–4-(2–в)'), '1:2 000')
+        self.assertEqual(get_scale_from_segment('М–34–44-(4)'), '1:5 000')
+        self.assertEqual(get_scale_from_segment('L–35–3'), '1:100 000')
+        self.assertEqual(get_scale_from_segment('М–35-ІХ'), '1:200 000')
+        self.assertEqual(get_scale_from_segment('В–4–1–А–в'), '1:25 000')
+        self.assertEqual(get_scale_from_segment('М–35–14–А'), '1:50 000')
+        self.assertEqual(get_scale_from_segment('А–35-А'), '1:500 000')
+        self.assertEqual(get_scale_from_segment('М–5–5-(5–в)'), '1:2 000')
+        self.assertEqual(get_scale_from_segment('М–35-ХІІІ'), '1:200 000')
+        self.assertEqual(get_scale_from_segment('М–35-Г'), '1:500 000')
+        self.assertEqual(get_scale_from_segment('L–35'), '1:1 000 000')
+        self.assertEqual(get_scale_from_segment('К–22–4–А–а–4'), '1:10 000')
+        self.assertEqual(get_scale_from_segment('М–35–1–Г'), '1:50 000')
+        self.assertEqual(get_scale_from_segment('ІІІ–М–35'), '1:300 000')
+        self.assertEqual(get_scale_from_segment('М–4–4-(4)'), '1:5 000')
+
+    def test_values(self):
+        self.assertRaises(ValueError, get_scale_from_segment, 'М-ХІІІ-35')
+        self.assertRaises(ValueError, get_scale_from_segment, 'М–4–4-(4)-ХІІІ-35')
+        self.assertRaises(ValueError, get_scale_from_segment, 'A-A-A')
+
+    def test_type(self):
+        self.assertRaises(TypeError, get_scale_from_segment, 0)
+        self.assertRaises(TypeError, get_scale_from_segment, True)
+        self.assertRaises(TypeError, get_scale_from_segment, [0,])
+        self.assertRaises(TypeError, get_scale_from_segment, (0,))
+        self.assertRaises(TypeError, get_scale_from_segment, set())
+        self.assertRaises(TypeError, get_scale_from_segment, tuple())
+        self.assertRaises(TypeError, get_scale_from_segment, dict())
 
 
 if __name__ == "__main__":

@@ -1,3 +1,6 @@
+from flask.scaffold import F
+
+
 def coma_replace(string):
     if type(string) == float:
         string = str(string)
@@ -49,10 +52,10 @@ def get_scale_from_segment(segment):
         raise TypeError('Номенклатура Повинна Бути Записана Як Текст')
     elif len(segment) <= 1:
         raise ValueError('Введенна Номенклатура Занадто Коротка')
-    elif '-' not in segment:
+    elif '-' not in segment and '–' not in segment:
         raise ValueError('Неправильнно Введенна Номенклатура')
     else:
-        segment = segment.split('-')
+        segment = segment.replace('–', '-').replace('І', 'I').replace('Х', 'X').split('-')
         is_alpha, is_digit = False, False
         for i in segment:
             if i.isalpha():
@@ -60,36 +63,52 @@ def get_scale_from_segment(segment):
             elif i.isdigit():
                 is_digit = True
         if is_alpha and is_digit:
-            roman = ('I', 'II', 'III', 'IV', 'V', 'VI',	'VII', 'VIII', 'IX', 'X')
-            if segment[0].isalpha():
-                up_letters = ("А", "Б", "В", "Г")
-                low_letters = ("а", "б", "в", "г")
+            roman = ('I', 'II', 'III', 'IV', 'V', 'VI',	'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX',
+                     'XXI', 'XXII', 'XXIII', 'XXIV', 'XXV', 'XXVI', 'XXVII', 'XXVIII', 'XXIX', 'XXX', 'XXXI', 'XXXII', 'XXXIII', 'XXXVI', 'XXXV', 'XXXVI')
+            range1_5 = (str(i) for i in range(1, 5))
+            range1_145 = (str(i) for i in range(1, 145))
+            range1_257 = (str(i) for i in range(1, 257))
+            if segment[0].isalpha() and segment[0] not in roman:
+                up_letters = ("А", "Б", "В", "Г", 'A')
+                low_letters = ("а", "б", "в", "г", 'a')
                 if len(segment) == 2 and segment[1].isdigit():
                     res = '1:1 000 000'
-                elif len(segment) == 3 and segment[2] in up_letters:
+                elif len(segment) == 3 and segment[1].isdigit() and segment[2] in up_letters:
                     res = '1:500 000'
-                elif len(segment) and segment[2] in roman:
+                elif len(segment) == 3 and segment[1].isdigit() and segment[2] in roman:
                     res = '1:200 000' 
-                elif len(segment) == 3 and segment[2] in range(1, 145):
+                elif len(segment) == 3 and segment[1].isdigit() and segment[2] in range1_145:
                     res = '1:100 000'
                 elif len(segment) == 4:
-                    if segment[3] in up_letters:
-                        res = '1: 50 000'
+                    if segment[1].isdigit() and segment[2].isdigit() and segment[3] in up_letters:
+                        res = '1:50 000'
                     else:
-                        for i in range(1, 257):
-                            if i in segment[3] and '(' in segment[3] and ')' in segment[3]:
+                        flag = False
+                        for i in range1_257:
+                            if segment[1].isdigit() and segment[2].isdigit() and i in segment[3] and '(' in segment[3] and ')' in segment[3]:
                                 res = '1:5 000' 
+                                flag = True
+                                break
+                        if not flag:
+                            raise ValueError('Неправильнно Введенна Номенклатура')
                 elif len(segment) == 5:
-                    if segment[4] in low_letters:
+                    if segment[1].isdigit() and segment[2].isdigit() and segment[3] in up_letters and segment[4] in low_letters:
                         res = '1:25 000'
                     else:
-                        for i in range(1, 257):
+                        flag = False
+                        for i in range1_257:
                             for j in ('а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з', 'и'):
                                 if i in segment[3] and '(' in segment[3] and j in segment[4] and ')' in segment[4]:
-                                    res = '1:2 000'     
-                elif (len(segment) == 6 and segment[0].isdigit() and 
-                segment[1].isdigit() and segment[2] in range(1, 145) and segment[3] in up_letters and segment[4] in low_letters and segment[5] in range(1, 5)):
-                      res = '10 000'
+                                    res = '1:2 000'
+                                    flag = True
+                                    break
+                        if not flag:
+                            raise ValueError('Неправильнно Введенна Номенклатура')
+                elif (len(segment) == 6 and segment[0].isalpha() and 
+                segment[1].isdigit() and segment[2] in range1_145 and segment[3] in up_letters and segment[4] in low_letters and segment[5] in range1_5):
+                      res = '1:10 000'
+                else:
+                    raise ValueError('Неправильнно Введенна Номенклатура')
             elif segment[0] in roman:
                 res = '1:300 000'
             else:
@@ -97,7 +116,3 @@ def get_scale_from_segment(segment):
         else:
             raise ValueError('Неправильнно Введенна Номенклатура')
     return res
-
-
-
-        

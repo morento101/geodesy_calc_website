@@ -1,4 +1,6 @@
 from functools import reduce
+import re
+from unittest.signals import registerResult
 from flask import Blueprint, render_template, request
 from flask.helpers import flash
 from flask_login import login_required, current_user
@@ -76,7 +78,16 @@ def calc_map_accuracy():
 @views.route('/calc_segmentation', methods=["GET", "POST"])
 @login_required
 def calc_segmentation():
-    return render_template('calc_segmentation.html', user=current_user)
+    res=''
+    if request.method == 'POST':
+        segment = request.form.get('segment')
+        try:
+            scale = f.get_scale_from_segment(segment)
+        except Exception as e:
+            flash(f'{e}', category='error')
+        else:
+            res = scale
+    return render_template('calc_segmentation.html', user=current_user, res=res)
 
 
 @views.route('/calc_dividing', methods=["GET", "POST"])
