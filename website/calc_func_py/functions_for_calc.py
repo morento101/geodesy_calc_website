@@ -116,3 +116,37 @@ def get_scale_from_segment(segment):
         else:
             raise ValueError('Неправильнно Введенна Номенклатура')
     return res
+
+
+def divide_scales(dividing_scale, divider_scale):
+    if type(dividing_scale) != str:
+        raise TypeError("Масштаб Діленної Трапеції Повинен Бути Типу Текст")
+    elif type(divider_scale) != str:
+        raise TypeError("Масштаб Трапеції-Дільника Повинен Бути Типу Текст")
+    elif len(dividing_scale) <= 4:
+        raise ValueError('Масштаб Діленної Трапеції Повиннен Бути Мінімум Завдовжки 4 Символи')
+    elif len(divider_scale) <= 4:
+        raise ValueError('Масштаб Трапеції-Дільника Повиннен Бути Мінімум Завдовжки 4 Символи')
+    else:
+        dividing_scale, divider_scale = dividing_scale.replace(' ', ''), divider_scale.replace(' ', '')
+        if dividing_scale == "1000000" and divider_scale == "500000":
+            res = 4
+        elif dividing_scale == "1000000" and divider_scale == "300000":
+            res = 9
+        elif dividing_scale == "1000000" and divider_scale == "200000":
+            res = 36
+        elif dividing_scale == "1000000" and divider_scale == "100000":
+            res = 144
+        elif dividing_scale == "100000" and divider_scale == "50000":
+            res = 4
+        elif dividing_scale == "50000" and divider_scale == "25000":
+            res = 4
+        elif dividing_scale == "25000" and divider_scale == "10000":
+            res = 4
+        elif dividing_scale == "100000" and divider_scale == "5000":
+            res = 256
+        elif dividing_scale == "5000" and divider_scale == "2000":
+            res = 9
+        else:
+            raise ValueError('Введенні Дані Не Є Правильними')
+        return res

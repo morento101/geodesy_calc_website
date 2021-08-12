@@ -1,5 +1,5 @@
 import unittest
-from functions_for_calc import y_value_for_zones, accuracy_of_scale, get_scale_from_segment
+from functions_for_calc import y_value_for_zones, accuracy_of_scale, get_scale_from_segment, divide_scales
 
 
 class TestYValueForZones(unittest.TestCase):
@@ -82,6 +82,34 @@ class TestGetScaleFromSegment(unittest.TestCase):
         self.assertRaises(TypeError, get_scale_from_segment, set())
         self.assertRaises(TypeError, get_scale_from_segment, tuple())
         self.assertRaises(TypeError, get_scale_from_segment, dict())
+
+
+class TestDivideScales(unittest.TestCase):
+    def test_divide_scale(self):
+        self.assertEqual(divide_scales('1 000 000', '200 000',), 36)
+        self.assertEqual(divide_scales('1 000 000', '300 000',), 9)
+        self.assertEqual(divide_scales('5 000', '2 000',), 9)
+        self.assertEqual(divide_scales('1 000 000', '100 000',), 144)
+        self.assertEqual(divide_scales('1 000 000', '500 000',), 4)
+        self.assertEqual(divide_scales('100 000', '5 000',), 256)
+        self.assertEqual(divide_scales('50 000', '25 000',), 4)
+        self.assertEqual(divide_scales('100 000', '50 000',), 4)
+        self.assertEqual(divide_scales('25 000', '10 000',), 4)
+
+    
+    def test_types(self):
+        self.assertRaises(TypeError, divide_scales, True, '5 000')
+        self.assertRaises(TypeError, divide_scales, '5 000', (1,))
+        self.assertRaises(TypeError, divide_scales, 1, '100 000')
+        self.assertRaises(TypeError, divide_scales, dict(), '1 000 000')
+        self.assertRaises(TypeError, divide_scales, tuple(), 1)
+
+    
+    def test_values(self):
+        self.assertRaises(ValueError, divide_scales, '0', '1')
+        self.assertRaises(ValueError, divide_scales, 'True', 'None')
+        self.assertRaises(ValueError, divide_scales, 'set()', 'spam')
+        self.assertRaises(ValueError, divide_scales, '[1, 2, 3]', '1')
 
 
 if __name__ == "__main__":
