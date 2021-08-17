@@ -1,6 +1,3 @@
-from functools import reduce
-import re
-from unittest.signals import registerResult
 from flask import Blueprint, render_template, request
 from flask.helpers import flash
 from flask_login import login_required, current_user
@@ -17,6 +14,7 @@ def home():
 @views.route("/calc_zone", methods=["GET", "POST"])
 @login_required
 def calc_zone():
+    res = ''
     if request.method == 'POST':
         zone = request.form.get('zoneNumber')
         distance = request.form.get('distance')
@@ -24,7 +22,6 @@ def calc_zone():
         if zone:
             if distance:
                 if direction:
-                    res = ''
                     try:
                         zone = int(zone)
                     except Exception:
@@ -39,27 +36,24 @@ def calc_zone():
                                 res = f.y_value_for_zones(zone, distance, direction)
                             except Exception as e:
                                 flash(f'{e}', category="error")
-                    finally:
-                        return render_template("calc_zone.html", user=current_user, res=res)
                 else:
                     flash("Введіть напрям", category="error")
             else:
                 flash("Введіть відстань", category="error")
         else:
             flash("Введіть номер зони", category="error")
-        return render_template("calc_zone.html", user=current_user)
-    else:
-        return render_template("calc_zone.html", user=current_user)
+    return render_template('calc/zone.html', user=current_user, res=res)
 
 
 @views.route('/calc_map_accuracy', methods=["GET", "POST"])
 @login_required
 def calc_map_accuracy():
+    res = ''
     if request.method == "POST":
         scale = request.form.get('scale')
         if scale:
-            res = ''
             try:
+                scale = scale.replace(' ', '')
                 scale = int(scale)
             except Exception as e:
                 flash('Масштаб повинен бути цілим додатнім числом', category="error") 
@@ -68,11 +62,9 @@ def calc_map_accuracy():
                     res = f.accuracy_of_scale(scale)
                 except Exception as e:
                     flash(f"{e}", category="error")
-            finally:
-                return render_template('calc_map_accuracy.html', user=current_user, res=res)
         else:
             flash('Введіть масштаб', category="error")
-    return render_template('calc_map_accuracy.html', user=current_user)
+    return render_template('calc/map_accuracy.html', user=current_user, res=res)
 
 
 @views.route('/calc_segmentation', methods=["GET", "POST"])
@@ -87,11 +79,24 @@ def calc_segmentation():
             flash(f'{e}', category='error')
         else:
             res = scale
-    return render_template('calc_segmentation.html', user=current_user, res=res)
+    return render_template('calc/segmentation.html', user=current_user, res=res)
 
 
 @views.route('/calc_dividing', methods=["GET", "POST"])
 @login_required
 def calc_dividing():
-    return render_template('calc_dividing.html', user=current_user)
-
+    res = ''
+    if request.method == "POST":
+        dividing_scale = request.form.get('dividing1')
+        divider_scale = request.form.get('dividing2')
+        if dividing_scale:
+            if divider_scale:
+                try:
+                    res = f.divide_scales(dividing_scale, divider_scale)
+                except Exception as e:
+                    flash(f"{e}", category="error")
+            else:
+                flash('Введіть Масштаб Трапеції, Що Потрібно Отримати В Результаті Ділення', category="error")
+        else:
+            flash('Введіть Масштаб Трапеції, Що Ділиться', category="error")
+    return render_template('calc/dividing.html', user=current_user, res=res)

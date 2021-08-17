@@ -2,10 +2,10 @@
 content %}
 <h3 align="center">Обчислити</h3>
 <!-- ZONE -->
-<div class="flex-div">
+<div class="flex-div d-flex mt-5 justify-content-center">
   <div class="card">
     <img
-      src="{{ url_for('static', filename='zones.png') }}"
+      src="{{ url_for('static', filename='photos/zones.png') }}"
       class="card-img-top"
       alt="Зони"
     />
@@ -18,41 +18,66 @@ content %}
   <!-- ACCURACY -->
   <div class="card">
     <img
-      src="{{ url_for('static', filename='accuracy.gif') }}"
+      src="{{ url_for('static', filename='photos/accuracy.gif') }}"
       class="card-img-top"
       alt="Точність"
     />
     <div class="card-body">
       <h5 class="card-title">Точність Маcштабу Карти</h5>
       <p class="card-text">Маючи При Цьому Масштаб Карти</p>
-      <a class="btn btn-primary" href="/calc_map_accuracy" role="button">Обчислити</a>
+      <a class="btn btn-primary" href="/calc_map_accuracy" role="button"
+        >Обчислити</a
+      >
     </div>
-  </div> 
+  </div>
   <!-- SEGMENTATION -->
   <div class="card">
     <img
-      src="{{ url_for('static', filename='segmentation.svg') }}"
+      src="{{ url_for('static', filename='photos/segmentation.svg') }}"
       class="card-img-top"
       alt="Сегментація"
     />
     <div class="card-body">
       <h5 class="card-title">Масштаб Карти</h5>
-      <p class="card-text">Визначити Масштаб Топографічної Карти Через Її Номенклатуру</p>
-      <a class="btn btn-primary" href="/calc_segmentation" role="button">Обчислити</a>
+      <p class="card-text">
+        Визначити Масштаб Топографічної Карти Через Її Номенклатуру
+      </p>
+      <a class="btn btn-primary" href="/calc_segmentation" role="button"
+        >Обчислити</a
+      >
     </div>
-  </div> 
+  </div>
   <!-- DIVIDING -->
   <div class="card">
     <img
-      src="{{ url_for('static', filename='dividing.jpg') }}"
+      src="{{ url_for('static', filename='photos/dividing.jpg') }}"
       class="card-img-top"
       alt="Номенклатура"
     />
     <div class="card-body">
-      <h5 class="card-title">Ділення трапецій</h5>
-      <p class="card-text">На Скільки Частин Потрібно Розділити Одну Трапецію, Щоб Отримати Іншу</p>
-      <a class="btn btn-primary" href="/calc_dividing" role="button">Обчислити</a>
+      <h5 class="card-title">Ділення Трапецій</h5>
+      <p class="card-text">
+        На Скільки Частин Потрібно Розділити Одну Трапецію, Щоб Отримати Іншу
+      </p>
+      <a class="btn btn-primary" href="/calc_dividing" role="button"
+        >Обчислити</a
+      >
     </div>
-  </div> 
+  </div>
+  <!-- TRAPEZOID'S SIZES -->
+  <div class="card">
+    <img
+      src="{{ url_for('static', filename='photos/sizing.png') }}"
+      class="card-img-top"
+      alt="Номенклатура"
+    />
+    <div class="card-body">
+      <h5 class="card-title">Розміри Трапеції</h5>
+      <p class="card-text">Визначити Масштаб Трапеції Через Її Розміри</p>
+      <a class="btn btn-primary" href="/calc_dividing" role="button"
+        >Обчислити</a
+      >
+    </div>
+  </div>
 </div>
 {% endblock %}

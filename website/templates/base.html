@@ -11,73 +11,79 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ url_for('static', filename='photos/icon_photo.png') }}"
+    />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="#">Геодезичний калькулятор</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <div class="wrapper">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Геодезичний калькулятор</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          {% if user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="/"
-              >Обчислити <span class="sr-only">(current)</span></a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Вийти</a>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="/sign-up">Реєстрація</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Авторизація</a>
-          </li>
-          {% endif %}
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="/"
+                >Обчислити <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Вийти</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="/sign-up">Реєстрація</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Авторизація</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages%} {% for category, message in messages %} {% if category ==
+      'error' %}
+      <div class="alert alert-danger alter-dismissable fade show" role="aler">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    </nav>
-
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages%} {% for category, message in messages %} {% if category == 'error'
-    %}
-    <div class="alert alert-danger alter-dismissable fade show" role="aler">
-      {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    {% else %}
-    <div class="alert alert-success alter-dismissable fade show" role="aler">
-      {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    {% endif %} {% endfor %} {% endif %} {% endwith %}
-
-    <div class="container" style="margin-top: 40px">
-      {% block content %} {% endblock %}
-    </div>
-    <div class="positioned"></div>
-    <footer class="container-fluid pt-3 pb-3 bg-light">
-      <div class="container">
-        <p class="mb-0">Всі права захищенні</p>
+      {% else %}
+      <div class="alert alert-success alter-dismissable fade show" role="aler">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    </footer>
-    </footer>
+      {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+      <div class="container" style="padding-bottom: 70px">
+        {% block content %} {% endblock %}
+      </div>
+      <div class="positioned"></div>
+      <footer class="container-fluid pt-3 pb-3 bg-light">
+        <div class="container">
+          <p class="mb-0">© Всі права захищенні</p>
+        </div>
+      </footer>
+    </div>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
