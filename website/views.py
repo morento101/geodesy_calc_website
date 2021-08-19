@@ -1,13 +1,14 @@
 from flask import Blueprint, render_template, request
 from flask.helpers import flash
 from flask_login import login_required, current_user
-import website.calc_func_py.functions_for_calc as f
+import website.calculating as f
 
 views = Blueprint('views', __name__)
 
 @views.route('/')
 @login_required
 def home():
+    print(current_user)
     return render_template("calculate.html", user=current_user)
 
 
@@ -100,3 +101,10 @@ def calc_dividing():
         else:
             flash('Введіть Масштаб Трапеції, Що Ділиться', category="error")
     return render_template('calc/dividing.html', user=current_user, res=res)
+
+
+@views.route('/calc_size', methods=["GET", "POST"])
+@login_required
+def calc_size():
+    res = ''
+    return render_template('calc/size.html', user=current_user, res=res)

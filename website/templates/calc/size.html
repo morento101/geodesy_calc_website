@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block title %}Масштаб{% endblock %} {% block content
+%}
+<h3 align="center">Розміри Трапецій</h3>
+<form
+  name="size"
+  action="{{ url_for('views.calc_size') }}"
+  method="post"
+  autocomplete="off"
+>
+  <div class="form-group">
+    <label for="b">ΔВ</label>
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="b"
+        name="b"
+        placeholder="1º20' = 1 20"
+      />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="l">ΔL</label>
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="l"
+        name="l"
+        placeholder="2º = 2 00"
+      />
+    </div>
+  </div>
+  <p>Градуси Вводити Через Пробіл</p>
+  <div
+    class="p-3 mb-2 bg-success text-white rounded"
+    style="white-space: pre-line"
+  >Відповідь: {{ res }}
+  </div>
+  <hr />
+  <a class="btn btn-secondary" href="/" role="button">Назад</a>
+  <button type="submit" class="btn btn-primary">Порахувати</button>
+</form>
+{% endblock %}
