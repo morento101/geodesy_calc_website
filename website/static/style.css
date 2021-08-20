@@ -52,3 +52,7 @@ h3 {
     float: none; 
     margin-bottom: 15px;
 }
+
+.alert {
+    border-radius: 0%;
+}

@@ -34,7 +34,7 @@ content %}
       placeholder="Введіть пароль ще раз"
     />
   </div>
-  <span>Уже Зареєструвані? <a href="/login">Авторизуватись</a></span>
+  <span class="text-muted">Уже Зареєструвані? <a href="{{ url_for('auth.login') }}">Авторизуватись</a></span>
   <hr />
   <button type="submit" class="btn btn-primary">Зареєструватись</button>
 </form>

@@ -15,6 +15,7 @@ content %}
     <label for="exampleInputPassword1" class="form-label">Пароль</label>
     <input type="password" class="form-control" id="exampleInputPassword1" name="password"/>
   </div>
+  <span class="text-muted">Забули пароль? <a href='{{ url_for("auth.reset_request") }}'>Скинути Пароль</a></span>
   <hr />
   <button type="submit" class="btn btn-primary">Увійти</button>
 </form>

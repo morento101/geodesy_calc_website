@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request
 from flask.helpers import flash
 from flask_login import login_required, current_user
-import website.calculating as f
+import website.calculating.functions as f
 
 views = Blueprint('views', __name__)
 
@@ -107,4 +107,17 @@ def calc_dividing():
 @login_required
 def calc_size():
     res = ''
+    if request.method == 'POST':
+        b = request.form.get('b')
+        l = request.form.get('l')
+        if b:
+            if l:
+                try:
+                    res = f.scale_from_size(b, l)
+                except Exception as e:
+                    flash(f'{e}')
+            else:
+                flash('Введіть ΔL')
+        else:
+            flash('Введіть ΔL')
     return render_template('calc/size.html', user=current_user, res=res)

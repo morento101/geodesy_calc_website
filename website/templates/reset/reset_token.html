@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block title %}Новий Пароль{% endblock %} {% block
+content %}
+<h3 align="center">Новий Пароль</h3>
+<form method="POST">
+  <div class="mb-3">
+    <label for="resetPassword" class="form-label">Пароль</label>
+    <input
+      type="password"
+      class="form-control"
+      id="reset_password"
+      name="reset_password"
+      placeholder="Придумайте новий пароль"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="resetPasswordConfirm" class="form-label"
+      >Пароль (Підтверження)</label
+    >
+    <input
+      type="password"
+      class="form-control"
+      id="reset_password_confirm"
+      name="reset_password_confirm"
+      placeholder="Введіть пароль ще раз"
+    />
+  </div>
+  <hr />
+  <button type="submit" class="btn btn-primary">Зберегти</button>
+</form>
+{% endblock %}
