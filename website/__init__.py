@@ -1,23 +1,17 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import path, environ
+from os import path
 from flask_login import LoginManager
 from flask_mail import Mail
+from website.config import Config
 
 db = SQLAlchemy()
-DB_NAME = 'database.db'
 mail = Mail()
 
 
-def create_app():
+def create_app(config_class=Config):
     app = Flask(__name__)
-    app.config["SECRET_KEY"] = 'fjeiwjvuhawifj'
-    app.config["SQLALCHEMY_DATABASE_URI"] = f'sqlite:///{DB_NAME}'
-    app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
-    app.config['MAIL_PORT'] = 465
-    app.config['MAIL_USE_SSL'] = True
-    app.config['MAIL_USERNAME'] = environ.get('MAIL_USER')
-    app.config['MAIL_PASSWORD'] = environ.get('MAIL_PASS')
+    app.config.from_object(Config)
 
     db.init_app(app)
     mail.init_app(app)
@@ -51,11 +45,6 @@ def create_app():
 
 
 def create_database(app):
-    if not path.exists('website/' + DB_NAME):
+    if not path.exists('website/database.db'):
         db.create_all(app=app)
         print('Created Database!')
-
-    
-def create_mail(app):
-    mail = Mail(app)
-    return mail

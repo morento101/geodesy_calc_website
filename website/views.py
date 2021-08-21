@@ -8,7 +8,6 @@ views = Blueprint('views', __name__)
 @views.route('/')
 @login_required
 def home():
-    print(current_user)
     return render_template("calculate.html", user=current_user)
 
 
